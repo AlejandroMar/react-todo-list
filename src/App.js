@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import SearchBar from './components/SearchBar'
+import SearchBar from './components/SearchBar';
+import TaskListBody from './components/TaskListBody'
 
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
             <div>
                 <h2>Todos</h2>
                 <SearchBar addTask={this.addTask} pushTask={this.pushTask} presentTask={this.state.presentTask} />
+                <TaskListBody />
             </div>
         );
     }
