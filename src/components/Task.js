@@ -20,7 +20,7 @@ const Task = (props) => {
         return (
            <li className={`collection-item ${props.task.done ? 'line-through' : ''}`}>{props.task.task}
                 <a onClick={clickDone}
-                className="waves-effect waves-light btn secondary-content">
+                className={`waves-effect waves-light btn secondary-content ${props.task.done ? 'amber darken-2' : '' }`}>
                     <i  className="large material-icons">done</i>
                 </a>
                 <a onClick={clickToErase}
