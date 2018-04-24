@@ -19,17 +19,17 @@ const Task = (props) => {
     }
         return (
            <li className={`collection-item ${props.task.done ? 'line-through' : ''}`}>{props.task.task}
-                <a 
+                <a onClick={clickDone}
                 className="waves-effect waves-light btn secondary-content">
-                    <i onClick={clickDone} className="large material-icons">done</i>
+                    <i  className="large material-icons">done</i>
                 </a>
-                <a
+                <a onClick={clickToErase}
                 className="waves-effect waves-light btn secondary-content">
-                    <i onClick={clickToErase} className="large material-icons">close</i>
+                    <i  className="large material-icons">close</i>
                 </a>
-                <a
+                <a onClick={clickToEdit}
                 className="waves-effect waves-light btn secondary-content">
-                    <i onClick={clickToEdit} className="large material-icons">brush</i>
+                    <i  className="large material-icons">brush</i>
                 </a>
             </li>
         )
