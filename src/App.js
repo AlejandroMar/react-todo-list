@@ -23,12 +23,19 @@ class App extends Component {
         this.setState({ tasksList: tasksList, presentTask: '' });
     }
 
+    eraseTask = (index) => {
+        console.log(index);
+        let tasksList = [...this.state.tasksList];
+        tasksList.splice(index, 1);
+        this.setState({ tasksList })
+    }
+
     render() {
         return (
             <div className="container">
                 <h2>Todos</h2>
                 <SearchBar addTask={this.addTask} pushTask={this.pushTask} presentTask={this.state.presentTask} />
-                <TaskListBody tasks={this.state.tasksList}/>
+                <TaskListBody tasks={this.state.tasksList} eraseTask={this.eraseTask}/>
             </div>
         );
     }
