@@ -23,8 +23,13 @@ class App extends Component {
             id: Date.now()
         }
         const tasksList = [...this.state.tasksList];
-        tasksList.push(newTask);
-        this.setState({ tasksList: tasksList, presentTask: '' });
+        if (newTask.task) {
+            tasksList.push(newTask);
+            this.setState({ tasksList: tasksList, presentTask: '' });
+        }else{
+            return;
+        }
+
     }
 
     eraseTask = (index) => {
@@ -36,14 +41,14 @@ class App extends Component {
     taskDone = (index) => {
         const tasksList = [...this.state.tasksList];
         tasksList[index].done = true;
-        this.setState({ tasksList })  
+        this.setState({ tasksList })
     }
 
     editTask = (index) => {
         const tasksList = [...this.state.tasksList];
         const presentTask = tasksList[index].task;
         tasksList.splice(index, 1);
-        this.setState({ tasksList, presentTask })  
+        this.setState({ tasksList, presentTask })
     }
 
     render() {
@@ -51,11 +56,11 @@ class App extends Component {
             <div className="container">
                 <h2>Todos</h2>
                 <SearchBar addTask={this.addTask} pushTask={this.pushTask} presentTask={this.state.presentTask} />
-                <TaskListBody 
-                    tasks={this.state.tasksList} 
-                    eraseTask={this.eraseTask} 
+                <TaskListBody
+                    tasks={this.state.tasksList}
+                    eraseTask={this.eraseTask}
                     taskDone={this.taskDone}
-                    editTask={this.editTask}/>
+                    editTask={this.editTask} />
             </div>
         );
     }
