@@ -28,7 +28,7 @@ class App extends Component {
             <div>
                 <h2>Todos</h2>
                 <SearchBar addTask={this.addTask} pushTask={this.pushTask} presentTask={this.state.presentTask} />
-                <TaskListBody />
+                <TaskListBody tasks={this.state.tasksList}/>
             </div>
         );
     }

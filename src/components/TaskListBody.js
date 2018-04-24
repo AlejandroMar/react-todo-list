@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Task from './Task';
 
-class TaskListBody extends Component {
-    render() {
+const TaskListBody = (props) => {
+
         return (
             <ul>
-                <Task />
+                {props.tasks.map(task => <Task task={task.task}/>)}
             </ul>
         )
-    }
+    
 }
 
 export default TaskListBody;
