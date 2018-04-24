@@ -7,10 +7,12 @@ const TaskListBody = (props) => {
             <ul className="collection">
                 {props.tasks.map((task, index) => {
                     return (
-                        <Task task={task.task} 
+                        <Task task={task} 
                         key={task.id} 
                         taskIndex={index} 
-                        eraseTask={props.eraseTask}/>
+                        eraseTask={props.eraseTask}
+                        taskDone={props.taskDone}
+                        editTask={props.editTask}/>
                     )       
                 })}
             </ul>

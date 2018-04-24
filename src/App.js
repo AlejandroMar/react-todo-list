@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import SearchBar from './components/SearchBar';
-import TaskListBody from './components/TaskListBody'
+import './App.css';
+import TaskListBody from './components/TaskListBody';
+
+
 
 
 class App extends Component {
@@ -16,6 +19,7 @@ class App extends Component {
     pushTask = () => {
         const newTask = {
             task: this.state.presentTask,
+            done: false,
             id: Date.now()
         }
         const tasksList = [...this.state.tasksList];
@@ -24,10 +28,20 @@ class App extends Component {
     }
 
     eraseTask = (index) => {
-        console.log(index);
-        let tasksList = [...this.state.tasksList];
+        const tasksList = [...this.state.tasksList];
         tasksList.splice(index, 1);
         this.setState({ tasksList })
+    }
+
+    taskDone = (index) => {
+        const tasksList = [...this.state.tasksList];
+        tasksList[index].done = true;
+        this.setState({ tasksList })  
+    }
+
+    editTask = (index) => {
+        console.log('editing');
+        
     }
 
     render() {
@@ -35,7 +49,11 @@ class App extends Component {
             <div className="container">
                 <h2>Todos</h2>
                 <SearchBar addTask={this.addTask} pushTask={this.pushTask} presentTask={this.state.presentTask} />
-                <TaskListBody tasks={this.state.tasksList} eraseTask={this.eraseTask}/>
+                <TaskListBody 
+                    tasks={this.state.tasksList} 
+                    eraseTask={this.eraseTask} 
+                    taskDone={this.taskDone}
+                    editTask={this.editTask}/>
             </div>
         );
     }
