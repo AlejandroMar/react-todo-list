@@ -4,7 +4,7 @@ import Task from './Task';
 const TaskListBody = (props) => {
 
         return (
-            <ul>
+            <ul className="collection">
                 {props.tasks.map(task => <Task task={task.task}/>)}
             </ul>
         )

@@ -3,7 +3,8 @@ import React from 'react';
 
 const Task = (props) => {
         return (
-           <li>{props.task}</li>
+            
+           <li className="collection-item">{props.task}</li>
         )
 }
 

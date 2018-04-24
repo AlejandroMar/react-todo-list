@@ -25,7 +25,7 @@ class App extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <h2>Todos</h2>
                 <SearchBar addTask={this.addTask} pushTask={this.pushTask} presentTask={this.state.presentTask} />
                 <TaskListBody tasks={this.state.tasksList}/>
