@@ -40,8 +40,10 @@ class App extends Component {
     }
 
     editTask = (index) => {
-        console.log('editing');
-        
+        const tasksList = [...this.state.tasksList];
+        const presentTask = tasksList[index].task;
+        tasksList.splice(index, 1);
+        this.setState({ tasksList, presentTask })  
     }
 
     render() {
