@@ -50,7 +50,7 @@ class App extends Component {
 
     eraseTask = (index) => {
         const tasksList = [...this.state.tasksList];
-        console.log(tasksList[index].id)
+
         fetch(`http://localhost:5000/todos/${tasksList[index].id}`, {
             method: 'DELETE',
             headers: {
@@ -59,14 +59,9 @@ class App extends Component {
             }
         })
             .then((result) => {
-                console.log('halo')
                 tasksList.splice(index, 1);
                 this.setState({ tasksList })
             })
-
-
-
-
     }
 
     taskDone = (index) => {
@@ -89,18 +84,17 @@ class App extends Component {
     editTask = (index) => {
         const tasksList = [...this.state.tasksList];
         const presentTask = tasksList[index].task;
-        tasksList.splice(index, 1);
-        this.setState({ tasksList, presentTask })
 
-         fetch(`http://localhost:5000/todos/${tasksList[index].id}`, {
+        fetch(`http://localhost:5000/todos/${tasksList[index].id}`, {
+            method: 'DELETE',
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            //method is case sensitive
-            method: 'PATCH',
-            body: JSON.stringify([{ propName: 'done', value: tasksList[index].done }])
-        });
+                //very important to give the headers
+                'content-type': 'application/json'
+            }
+        }).then(() => {
+            tasksList.splice(index, 1);
+            this.setState({ tasksList, presentTask })
+        })
     }
 
     render() {
