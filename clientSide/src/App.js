@@ -12,6 +12,12 @@ class App extends Component {
         tasksList: []
     }
 
+    componentDidMount() {
+        fetch('http://localhost:5000/todos')
+            .then(result => result.json())
+            .then(todos => this.setState({ tasksList: todos }))
+    }
+
     addTask = task => {
         this.setState({ presentTask: task.target.value })
     }
@@ -26,6 +32,17 @@ class App extends Component {
         if (newTask.task) {
             tasksList.push(newTask);
             this.setState({ tasksList: tasksList, presentTask: '' });
+            const task = newTask;
+
+            fetch('http://localhost:5000/todos', {
+                method: 'POST',
+                headers: {
+                    //very important to give the headers
+                    'user-agent': 'Mozilla/4.0 MDN Example',
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(task)
+            });
         }
 
     }

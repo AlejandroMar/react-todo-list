@@ -8,7 +8,7 @@ const TaskListBody = (props) => {
                 {props.tasks.map((task, index) => {
                     return (
                         <Task task={task} 
-                        key={task.id} 
+                        key={task.id || task._id} 
                         taskIndex={index} 
                         eraseTask={props.eraseTask}
                         taskDone={props.taskDone}
