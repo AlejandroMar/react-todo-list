@@ -38,7 +38,6 @@ class App extends Component {
                 method: 'POST',
                 headers: {
                     //very important to give the headers
-                    'user-agent': 'Mozilla/4.0 MDN Example',
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify(task)
