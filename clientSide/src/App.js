@@ -32,7 +32,7 @@ class App extends Component {
         if (newTask.task) {
             tasksList.push(newTask);
             this.setState({ tasksList: tasksList, presentTask: '' });
-            const task = newTask;
+
 
             fetch('http://localhost:5000/todos', {
                 method: 'POST',
@@ -40,7 +40,7 @@ class App extends Component {
                     //very important to give the headers
                     'content-type': 'application/json'
                 },
-                body: JSON.stringify(task)
+                body: JSON.stringify(newTask)
             });
         }
 
