@@ -26,8 +26,6 @@ class App extends Component {
         if (newTask.task) {
             tasksList.push(newTask);
             this.setState({ tasksList: tasksList, presentTask: '' });
-        }else{
-            return;
         }
 
     }
@@ -40,7 +38,7 @@ class App extends Component {
 
     taskDone = (index) => {
         const tasksList = [...this.state.tasksList];
-        tasksList[index].done = true;
+        tasksList[index].done = !tasksList[index].done;
         this.setState({ tasksList })
     }
 
