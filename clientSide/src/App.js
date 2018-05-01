@@ -33,7 +33,6 @@ class App extends Component {
             tasksList.push(newTask);
             this.setState({ tasksList: tasksList, presentTask: '' });
 
-
             fetch('http://localhost:5000/todos', {
                 method: 'POST',
                 headers: {
@@ -46,16 +45,45 @@ class App extends Component {
 
     }
 
+
+
+
     eraseTask = (index) => {
         const tasksList = [...this.state.tasksList];
-        tasksList.splice(index, 1);
-        this.setState({ tasksList })
+        console.log(tasksList[index].id)
+        fetch(`http://localhost:5000/todos/${tasksList[index].id}`, {
+            method: 'DELETE',
+            headers: {
+                //very important to give the headers
+                'content-type': 'application/json'
+            }
+        })
+            .then((result) => {
+                console.log('halo')
+                tasksList.splice(index, 1);
+                this.setState({ tasksList })
+            })
+
+
+
+
     }
 
     taskDone = (index) => {
         const tasksList = [...this.state.tasksList];
         tasksList[index].done = !tasksList[index].done;
-        this.setState({ tasksList })
+        this.setState({ tasksList });
+
+        fetch(`http://localhost:5000/todos/${tasksList[index].id}`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            //method is case sensitive
+            method: 'PATCH',
+            body: JSON.stringify([{ propName: 'done', value: tasksList[index].done }])
+        });
+
     }
 
     editTask = (index) => {
@@ -63,6 +91,16 @@ class App extends Component {
         const presentTask = tasksList[index].task;
         tasksList.splice(index, 1);
         this.setState({ tasksList, presentTask })
+
+         fetch(`http://localhost:5000/todos/${tasksList[index].id}`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            //method is case sensitive
+            method: 'PATCH',
+            body: JSON.stringify([{ propName: 'done', value: tasksList[index].done }])
+        });
     }
 
     render() {

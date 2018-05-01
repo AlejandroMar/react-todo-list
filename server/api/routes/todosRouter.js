@@ -26,9 +26,46 @@ router.post('/', (req, res, next) => {
             task: task,
              message: 'task submited'
             })
-    })
-    
+    })  
     
 });
+
+router.delete("/:taskId", (req, res, next) => {
+    const id = req.params.taskId;
+    taskModel.remove({ id: id })
+      .exec()
+      .then(result => {
+        res.status(200).json(result);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
+      });
+  });
+
+  router.patch("/:taskId", (req, res, next) => {
+    const id = req.params.taskId;
+    console.log(req.body)
+    const updateOps = {};
+    for (let ops of req.body) {
+        
+      updateOps[ops.propName] = ops.value;
+    }
+    console.log(updateOps)
+    taskModel.update({ id: id }, { $set: updateOps })
+      .exec()
+      .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
+      });
+  });
 
 module.exports = router;
